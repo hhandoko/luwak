@@ -1,0 +1,112 @@
+buildscript {
+    ext.kotlinVersion = '1.1.2-4'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.1.2-2'
+    id 'maven-publish'
+    id 'com.github.ben-manes.versions' version '0.14.0'
+}
+apply plugin: 'kotlin'
+
+def mainClassName = 'com.hhandoko.luwak.MainKt'
+def buildNumber = "${System.env.CI_BUILD_NUMBER ? System.env.CI_BUILD_NUMBER : 'manual'}"
+def semanticVersion = "1.0.0"
+version = "$semanticVersion.$buildNumber"
+
+ext {
+    dropwizardVersion = '1.1.1'
+    junitVersion = '4.12'
+    mockitoVersion = '2.8.9'
+    assertjVersion = '3.8.0'
+    dropwizardHk2Version = '1.1.16-97d2fb'
+    kotlinLoggerVersion = '1.4.4'
+    dropwizardTemplateVersion = '1.5.0'
+    kotlinJacksonVersion = '2.8.7'
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    compileJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+        options.deprecation = true
+    }
+
+    compileTestJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+        options.deprecation = true
+    }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
+    compile "io.github.microutils:kotlin-logging:$kotlinLoggerVersion"
+    compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+    compile "zone.dragon.dropwizard:dropwizard-hk2:$dropwizardHk2Version"
+    compile "de.thomaskrille:dropwizard-template-config:$dropwizardTemplateVersion"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$kotlinJacksonVersion"
+
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.assertj:assertj-core:$assertjVersion"
+    testCompile "org.assertj:assertj-guava:3.1.0"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testCompile "com.nhaarman:mockito-kotlin:1.4.0"
+    testCompile "io.dropwizard:dropwizard-testing:$dropwizardVersion"
+}
+
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+task run(type: JavaExec) {
+    main = mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+    args 'server', 'app.yml'
+}
+
+configurations {
+    compile.exclude group: 'commons-logging'
+    compile.exclude group: 'org.jetbrains'
+}
+
+jar {
+    manifest {
+        attributes (
+                'Implementation-Version': version,
+                'Main-Class': mainClassName,
+                'Class-Path': configurations.runtime.files.collect { "lib/$it.name" }.join(' ')
+        )
+    }
+}
+
+
+task copyToLib(type: Copy) {
+    from configurations.runtime
+    into "${project.projectDir}/build/libs/lib"
+}
+
+build.finalizedBy(copyToLib)
