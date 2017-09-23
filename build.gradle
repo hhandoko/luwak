@@ -72,6 +72,7 @@ dependencies {
     compile "de.thomaskrille:dropwizard-template-config:$dropwizardTemplateVersion"
     compile "io.github.microutils:kotlin-logging:$kotlinLoggerVersion"
     compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+    compile "io.dropwizard:dropwizard-assets:$dropwizardVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
     compile "zone.dragon.dropwizard:dropwizard-hk2:$dropwizardHk2Version"
 
