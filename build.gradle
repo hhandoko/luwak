@@ -84,15 +84,8 @@ dependencies {
     testCompile "io.dropwizard:dropwizard-testing:$dropwizardVersion"
 }
 
-
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
-}
-
-task run(type: JavaExec) {
-    main = mainClassName
-    classpath = sourceSets.main.runtimeClasspath
-    args 'server', 'app.yml'
 }
 
 configurations {
@@ -110,6 +103,11 @@ jar {
     }
 }
 
+task run(type: JavaExec) {
+    main = mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+    args 'server', 'app.yml'
+}
 
 task copyToLib(type: Copy) {
     from configurations.runtime
