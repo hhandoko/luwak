@@ -16,7 +16,7 @@
 #    limitations under the License.
 ###
 server:
-  rootPath: /
+  rootPath: /api
   applicationConnectors:
     - type: http
       port:  ${APPLICATION_PORT!8080}

@@ -72,6 +72,7 @@ dependencies {
     compile "de.thomaskrille:dropwizard-template-config:$dropwizardTemplateVersion"
     compile "io.github.microutils:kotlin-logging:$kotlinLoggerVersion"
     compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+    compile "io.dropwizard:dropwizard-assets:$dropwizardVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
     compile "zone.dragon.dropwizard:dropwizard-hk2:$dropwizardHk2Version"
 
@@ -83,15 +84,8 @@ dependencies {
     testCompile "io.dropwizard:dropwizard-testing:$dropwizardVersion"
 }
 
-
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
-}
-
-task run(type: JavaExec) {
-    main = mainClassName
-    classpath = sourceSets.main.runtimeClasspath
-    args 'server', 'app.yml'
 }
 
 configurations {
@@ -109,6 +103,11 @@ jar {
     }
 }
 
+task run(type: JavaExec) {
+    main = mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+    args 'server', 'app.yml'
+}
 
 task copyToLib(type: Copy) {
     from configurations.runtime

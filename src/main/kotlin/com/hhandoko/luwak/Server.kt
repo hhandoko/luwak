@@ -21,6 +21,7 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import de.thomaskrille.dropwizard_template_config.TemplateConfigBundle
 import de.thomaskrille.dropwizard_template_config.TemplateConfigBundleConfiguration
 import io.dropwizard.Application
+import io.dropwizard.assets.AssetsBundle
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider
 import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
@@ -37,6 +38,7 @@ class Server : Application<ServerConfiguration>() {
                 TemplateConfigBundle(TemplateConfigBundleConfiguration())
         )
         bootstrap.addBundle(HK2Bundle())
+        bootstrap.addBundle(AssetsBundle("/app", "/", "index.html"))
         bootstrap.objectMapper.apply {
             registerModule(KotlinModule())
         }
@@ -51,6 +53,7 @@ class Server : Application<ServerConfiguration>() {
             })
 
             register(OrderResource::class.java)
+            urlPattern = "/api/*"
         }
     }
 

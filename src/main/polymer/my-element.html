@@ -1,0 +1,43 @@
+<!--
+ - File     : my-element.html
+ - License  :
+ -   Copyright (c) 2017 Herdy Handoko
+ -
+ -   Licensed under the Apache License, Version 2.0 (the "License");
+ -   you may not use this file except in compliance with the License.
+ -   You may obtain a copy of the License at
+ -
+ -           http://www.apache.org/licenses/LICENSE-2.0
+ -
+ -   Unless required by applicable law or agreed to in writing, software
+ -   distributed under the License is distributed on an "AS IS" BASIS,
+ -   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ -   See the License for the specific language governing permissions and
+ -   limitations under the License.
+ -->
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="my-element">
+    <template>
+        <h1>Kopi Luwak for [[today]].</h1>
+    </template>
+    <script>
+        import format from 'date-fns/format';
+
+        class MyElement extends Polymer.Element {
+            static get is() { return 'my-element'; }
+            static get properties() {
+                return {
+                    today: {
+                        type: String,
+                        value: function() {
+                            return format(new Date(), 'DD/MM/YYYY');
+                        }
+                    }
+                }
+            }
+        }
+
+        window.customElements.define(MyElement.is, MyElement);
+    </script>
+</dom-module>
