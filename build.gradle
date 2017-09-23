@@ -1,19 +1,20 @@
 buildscript {
-    ext.kotlinVersion = '1.1.2-4'
     repositories {
         mavenCentral()
+        jcenter()
     }
+
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.50'
     }
 }
+
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.1.2-2'
+    id 'org.jetbrains.kotlin.jvm' version '1.1.50'
     id 'maven-publish'
-    id 'com.github.ben-manes.versions' version '0.14.0'
+    id 'com.github.ben-manes.versions' version '0.15.0'
 }
-apply plugin: 'kotlin'
 
 def mainClassName = 'com.hhandoko.luwak.MainKt'
 def buildNumber = "${System.env.CI_BUILD_NUMBER ? System.env.CI_BUILD_NUMBER : 'manual'}"
@@ -21,14 +22,19 @@ def semanticVersion = "1.0.0"
 version = "$semanticVersion.$buildNumber"
 
 ext {
-    dropwizardVersion = '1.1.1'
-    junitVersion = '4.12'
-    mockitoVersion = '2.8.9'
-    assertjVersion = '3.8.0'
-    dropwizardHk2Version = '1.1.16-97d2fb'
-    kotlinLoggerVersion = '1.4.4'
+    dropwizardVersion = '1.1.4'
+    dropwizardHk2Version = '1.1.18-a1907f'
     dropwizardTemplateVersion = '1.5.0'
+    kotlinVersion = '1.1.50'
     kotlinJacksonVersion = '2.8.7'
+    kotlinLoggerVersion = '1.4.6'
+
+    // Test
+    assertjVersion = '3.8.0'
+    assertjGuavaVersion = '3.1.0'
+    junitVersion = '4.12'
+    mockitoVersion = '2.10.0'
+    mockitoKotlinVersion = '1.5.0'
 }
 
 allprojects {
@@ -62,18 +68,18 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$kotlinJacksonVersion"
+    compile "de.thomaskrille:dropwizard-template-config:$dropwizardTemplateVersion"
     compile "io.github.microutils:kotlin-logging:$kotlinLoggerVersion"
     compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
     compile "zone.dragon.dropwizard:dropwizard-hk2:$dropwizardHk2Version"
-    compile "de.thomaskrille:dropwizard-template-config:$dropwizardTemplateVersion"
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$kotlinJacksonVersion"
 
+    testCompile "com.nhaarman:mockito-kotlin-kt1.1:$mockitoKotlinVersion"
     testCompile "junit:junit:$junitVersion"
     testCompile "org.assertj:assertj-core:$assertjVersion"
-    testCompile "org.assertj:assertj-guava:3.1.0"
+    testCompile "org.assertj:assertj-guava:$assertjGuavaVersion"
     testCompile "org.mockito:mockito-core:$mockitoVersion"
-    testCompile "com.nhaarman:mockito-kotlin:1.4.0"
     testCompile "io.dropwizard:dropwizard-testing:$dropwizardVersion"
 }
 
