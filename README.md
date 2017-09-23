@@ -2,8 +2,24 @@
 
 `luwak` is an experimentation with [Dropwizard], [Kotlin], and [Polymer].
 
+## Development Prerequisites
+
+To compile, run, or package the project, you will need a Java SDK 8 distributions installed and a number of front-end
+JavaScript build tools:
+
+* Java SDK 8 distributions (choose one):
+  * [Azul Zulu] (recommended), or
+  * [OpenJDK], or
+  * [Oracle JDK]
+* JavaScript build tools:
+  * [Bower] v1.8.x
+  * [Node.js] v8.5.x
+  * [npm] v5.4.x
+
 ## Usage
 
+* `npm i && bower i` to download and install front-end JavaScript dependencies
+* `npm run build` to compile front-end JavaScript assets
 * `gradle run` to run the application from the command line
 * `gradle build` to compile a jar (to run with `java -jar <build jar> server`)
 
@@ -42,9 +58,15 @@ Please read [CONTRIBUTING] for more details.
 
 `luwak` is released under the Apache 2 license. See the [LICENSE] file for further details.
 
+[Azul Zulu]: https://www.azul.com/downloads/zulu/
+[Bower]: https://bower.io
 [CONTRIBUTING]: CONTRIBUTING.md
 [Dropwizard]: http://www.dropwizard.io
 [fork-and-pull]: https://help.github.com/articles/about-pull-requests/
 [Kotlin]: https://kotlinlang.org
 [LICENSE]: https://github.com/hhandoko/luwak/blob/master/LICENSE.txt
-[Polymer]: https://www.polymer-project.org/
+[OpenJDK]: http://openjdk.java.net/install/
+[Oracle JDK]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+[Node.js]: https://nodejs.org
+[npm]: https://www.npmjs.com
+[Polymer]: https://www.polymer-project.org
