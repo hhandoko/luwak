@@ -16,7 +16,7 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.15.0'
 }
 
-def mainClassName = 'com.hhandoko.luwak.MainKt'
+def mainClassName = 'com.hhandoko.luwak.Server'
 def buildNumber = "${System.env.CI_BUILD_NUMBER ? System.env.CI_BUILD_NUMBER : 'manual'}"
 def semanticVersion = "1.0.0"
 version = "$semanticVersion.$buildNumber"

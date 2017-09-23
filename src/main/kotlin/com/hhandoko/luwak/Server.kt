@@ -28,7 +28,7 @@ import io.dropwizard.setup.Environment
 import org.glassfish.hk2.utilities.binding.AbstractBinder
 import zone.dragon.dropwizard.HK2Bundle
 
-import com.hhandoko.luwak.resources.OrderResource
+import com.hhandoko.luwak.resource.OrderResource
 
 class Server : Application<ServerConfiguration>() {
 
@@ -57,4 +57,13 @@ class Server : Application<ServerConfiguration>() {
         }
     }
 
+    companion object {
+
+        @JvmStatic
+        @Throws(Exception::class)
+        fun main(args: Array<String>) {
+            Server().run(*args)
+        }
+
+    }
 }

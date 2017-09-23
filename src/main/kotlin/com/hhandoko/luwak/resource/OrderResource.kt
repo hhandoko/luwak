@@ -1,5 +1,5 @@
 /**
- * File     : Main.kt
+ * File     : OrderResource.kt
  * License  :
  *   Copyright (c) 2017 Herdy Handoko
  *
@@ -15,11 +15,22 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.hhandoko.luwak
+package com.hhandoko.luwak.resource
 
-@Throws(Exception::class)
-fun main(args: Array<String>) {
+import javax.ws.rs.GET
+import javax.ws.rs.Path
+import javax.ws.rs.Produces
+import javax.ws.rs.core.MediaType
 
-    Server().run(*args)
+import com.hhandoko.luwak.api.Order
+
+@Path("orders")
+@Produces(MediaType.APPLICATION_JSON)
+class OrderResource {
+
+    @GET
+    fun get(): Order {
+        return Order("Coffee")
+    }
 
 }
