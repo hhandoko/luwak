@@ -19,18 +19,30 @@ package com.hhandoko.luwak.resource
 
 import javax.ws.rs.GET
 import javax.ws.rs.Path
+import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
-import com.hhandoko.luwak.api.Order
+import com.hhandoko.luwak.api.OrderData
+import com.hhandoko.luwak.api.OrderResponse
+import com.hhandoko.luwak.api.OrdersResponse
+import java.util.*
 
-@Path("orders")
+@Path("/orders")
 @Produces(MediaType.APPLICATION_JSON)
 class OrderResource {
 
     @GET
-    fun get(): Order {
-        return Order("Coffee")
+    fun get(): OrdersResponse {
+        val order = OrderData(UUID.randomUUID().toString(), "Coffee")
+        return OrdersResponse(listOf(order))
+    }
+
+    @GET
+    @Path("/{ref}")
+    fun getOne(@PathParam("ref") id: String): OrderResponse {
+        val order = OrderData(id, "Coffee")
+        return OrderResponse(order)
     }
 
 }

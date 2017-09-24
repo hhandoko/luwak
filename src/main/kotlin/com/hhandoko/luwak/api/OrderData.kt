@@ -1,5 +1,5 @@
 /**
- * File     : Order.kt
+ * File     : OrderData.kt
  * License  :
  *   Copyright (c) 2017 Herdy Handoko
  *
@@ -17,4 +17,4 @@
  */
 package com.hhandoko.luwak.api
 
-data class Order(val name: String)
+data class OrderData(val ref: String, val name: String)
