@@ -39,14 +39,14 @@ class OrderResource {
     /**
      * Order data in-memory store.
      */
-    private val orderRepo = ConcurrentHashMap<String, OrderData>()
+    private val orderRepo = ConcurrentHashMap<UUID, OrderData>()
 
     init {
         // Populate the orderRepo with some data
         listOf(
-                OrderData(UUID.randomUUID().toString(), "Coffee"),
-                OrderData(UUID.randomUUID().toString(), "Tea"),
-                OrderData(UUID.randomUUID().toString(), "Milkshake")
+                OrderData(UUID.randomUUID(), "Coffee"),
+                OrderData(UUID.randomUUID(), "Tea"),
+                OrderData(UUID.randomUUID(), "Milkshake")
         ).map {
             Pair(it.ref, it)
         }.forEach {
@@ -69,7 +69,7 @@ class OrderResource {
      */
     @GET
     @Path("/{ref}")
-    fun getOne(@PathParam("ref") ref: String): OrderResponse {
+    fun getOne(@PathParam("ref") ref: UUID): OrderResponse {
         return orderRepo[ref]?.run {
             OrderResponse(this)
         } ?: throw WebApplicationException(Response.Status.NOT_FOUND)

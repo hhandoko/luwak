@@ -17,10 +17,12 @@
  */
 package com.hhandoko.luwak.api.order
 
+import java.util.UUID
+
 /**
  * Order response data.
  *
  * @param ref The unique order reference.
  * @param name The order.
  */
-data class OrderData(val ref: String, val name: String)
+data class OrderData(val ref: UUID, val name: String)
