@@ -4,13 +4,15 @@
 
 ## Development Prerequisites
 
-To compile, run, or package the project, you will need a Java SDK 8 distributions installed and a number of front-end
-JavaScript build tools:
+To compile, run, or package the project, you will need the following tools configured:
 
-* Java SDK 8 distributions (choose one):
+* Java SDK 8 distribution (choose one):
   * [Azul Zulu] (recommended), or
   * [OpenJDK], or
   * [Oracle JDK]
+* [Gradle] build tool, either:
+  * Install Gradle and add the executable in the system path (`gradle`), or
+  * Use the provided Gradle wrapper executable (`gradlew`) 
 * JavaScript build tools:
   * [Bower] v1.8.x
   * [Node.js] v8.5.x
@@ -20,8 +22,8 @@ JavaScript build tools:
 
 * `npm i && bower i` to download and install front-end JavaScript dependencies
 * `npm run build` to compile front-end JavaScript assets
-* `gradle run` to run the application from the command line
-* `gradle build` to compile a jar (to run with `java -jar <build jar> server`)
+* `gradle run` or `./gradlew run` to run the application from the command line
+* `gradle build` or `./gradlew build` to compile a jar (to run with `java -jar <build jar> server`)
 
 ## Contributing
 
@@ -63,6 +65,7 @@ Please read [CONTRIBUTING] for more details.
 [CONTRIBUTING]: CONTRIBUTING.md
 [Dropwizard]: http://www.dropwizard.io
 [fork-and-pull]: https://help.github.com/articles/about-pull-requests/
+[Gradle]: https://gradle.org
 [Kotlin]: https://kotlinlang.org
 [LICENSE]: https://github.com/hhandoko/luwak/blob/master/LICENSE.txt
 [OpenJDK]: http://openjdk.java.net/install/
