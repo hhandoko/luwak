@@ -1,5 +1,5 @@
 /**
- * File     : index.js
+ * File     : store.js
  * License  :
  *   Copyright (c) 2017 Herdy Handoko
  *
@@ -15,4 +15,4 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-import './my-element.html'
+export default class {}

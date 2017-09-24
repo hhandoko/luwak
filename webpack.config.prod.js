@@ -1,5 +1,5 @@
 /**
- * File     : webpack.config.js
+ * File     : webpack.config.prod.js
  * License  :
  *   Copyright (c) 2017 Herdy Handoko
  *
@@ -20,11 +20,10 @@ var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    devtool: 'eval',
     entry: path.resolve(__dirname, 'src/main/react/index'),
     output: {
         path: path.resolve(__dirname, 'src/main/resources/app'),
-        filename: 'app.js',
+        filename: 'app.min.js',
         publicPath: '/'
     },
     module: {
@@ -44,13 +43,18 @@ module.exports = {
         }]
 
     },
-    devServer: {
-        contentBase: path.join(__dirname, 'src/main/resources/app'),
-        compress: true,
-        port: 3000
-    },
     plugins: [
-        new webpack.NamedModulesPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                screw_ie8: true,
+                warnings: false
+            }
+        }),
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname, 'src/main/react/index.html'),
             to: 'index.html'
