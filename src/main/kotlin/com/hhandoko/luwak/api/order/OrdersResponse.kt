@@ -1,5 +1,5 @@
 /**
- * File     : OrderResponse.kt
+ * File     : OrdersResponse.kt
  * License  :
  *   Copyright (c) 2017 Herdy Handoko
  *
@@ -15,6 +15,12 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.hhandoko.luwak.api
+package com.hhandoko.luwak.api.order
 
-data class OrderResponse(val result: OrderData, val success: Boolean = true)
+/**
+ * Multiple orders query response.
+ *
+ * @param results The orders.
+ * @param success True to denote successful query.
+ */
+data class OrdersResponse(val results: List<OrderData>, val success: Boolean = true)

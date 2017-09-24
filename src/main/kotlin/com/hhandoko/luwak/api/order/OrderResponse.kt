@@ -1,5 +1,5 @@
 /**
- * File     : OrderData.kt
+ * File     : OrderResponse.kt
  * License  :
  *   Copyright (c) 2017 Herdy Handoko
  *
@@ -15,6 +15,12 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.hhandoko.luwak.api
+package com.hhandoko.luwak.api.order
 
-data class OrderData(val ref: String, val name: String)
+/**
+ * Single order query response.
+ *
+ * @param result The order.
+ * @param success True to denote successful query.
+ */
+data class OrderResponse(val result: OrderData, val success: Boolean = true)
