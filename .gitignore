@@ -297,3 +297,4 @@ $RECYCLE.BIN/
 
 ### Project-specific ###
 src/main/resources/app/
+package-lock.json
