@@ -1,5 +1,5 @@
 ###
-#  File     : app.yml
+#  File     : app-test.yml
 #  License  :
 #    Copyright (c) 2017 Herdy Handoko
 #
@@ -19,10 +19,10 @@ server:
   rootPath: /api
   applicationConnectors:
     - type: http
-      port: ${APPLICATION_PORT!8080}
+      port: ${APPLICATION_PORT!8090}
   adminConnectors:
     - type: http
-      port: ${ADMIN_PORT!8081}
+      port: ${ADMIN_PORT!8091}
   requestLog:
       appenders:
         - type: console

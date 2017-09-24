@@ -1,5 +1,5 @@
 /**
- * File     : OrderResource.kt
+ * File     : OrdersResponse.kt
  * License  :
  *   Copyright (c) 2017 Herdy Handoko
  *
@@ -15,22 +15,12 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.hhandoko.luwak.resources
+package com.hhandoko.luwak.api.order
 
-import javax.ws.rs.GET
-import javax.ws.rs.Path
-import javax.ws.rs.Produces
-import javax.ws.rs.core.MediaType
-
-import com.hhandoko.luwak.api.Order
-
-@Path("orders")
-@Produces(MediaType.APPLICATION_JSON)
-class OrderResource {
-
-    @GET
-    fun get(): Order {
-        return Order("Coffee")
-    }
-
-}
+/**
+ * Multiple orders query response.
+ *
+ * @param results The orders.
+ * @param success True to denote successful query.
+ */
+data class OrdersResponse(val results: List<OrderData>, val success: Boolean = true)

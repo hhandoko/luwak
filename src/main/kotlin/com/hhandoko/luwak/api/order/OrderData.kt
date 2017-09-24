@@ -1,5 +1,5 @@
 /**
- * File     : Order.kt
+ * File     : OrderData.kt
  * License  :
  *   Copyright (c) 2017 Herdy Handoko
  *
@@ -15,6 +15,14 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-package com.hhandoko.luwak.api
+package com.hhandoko.luwak.api.order
 
-data class Order(val name: String)
+import java.util.UUID
+
+/**
+ * Order response data.
+ *
+ * @param ref The unique order reference.
+ * @param name The order.
+ */
+data class OrderData(val ref: UUID, val name: String)

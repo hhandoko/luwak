@@ -28,10 +28,18 @@ import io.dropwizard.setup.Environment
 import org.glassfish.hk2.utilities.binding.AbstractBinder
 import zone.dragon.dropwizard.HK2Bundle
 
-import com.hhandoko.luwak.resources.OrderResource
+import com.hhandoko.luwak.resource.OrderResource
 
+/**
+ * Dropwizard server.
+ */
 class Server : Application<ServerConfiguration>() {
 
+    /**
+     * Initialize the server.
+     *
+     * @param bootstrap The server configuration.
+     */
     override fun initialize(bootstrap: Bootstrap<ServerConfiguration>) {
         bootstrap.configurationSourceProvider = ResourceConfigurationSourceProvider()
         bootstrap.addBundle(
@@ -44,6 +52,12 @@ class Server : Application<ServerConfiguration>() {
         }
     }
 
+    /**
+     * Run the server.
+     *
+     * @param configuration The server configuration.
+     * @param environment The server environment.
+     */
     override fun run(configuration: ServerConfiguration, environment: Environment) {
         environment.jersey().apply {
             register(object: AbstractBinder(){
@@ -57,4 +71,21 @@ class Server : Application<ServerConfiguration>() {
         }
     }
 
+    /**
+     * Server companion object (singleton).
+     */
+    companion object {
+
+        /**
+         * Main method to run the server with the given arguments.
+         *
+         * @param args The command-line arguments.
+         */
+        @JvmStatic
+        @Throws(Exception::class)
+        fun main(args: Array<String>) {
+            Server().run(*args)
+        }
+
+    }
 }
