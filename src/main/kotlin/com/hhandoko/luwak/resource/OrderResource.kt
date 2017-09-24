@@ -18,10 +18,10 @@
 package com.hhandoko.luwak.resource
 
 import java.util.*
-import javax.ws.rs.GET
-import javax.ws.rs.Path
-import javax.ws.rs.PathParam
-import javax.ws.rs.Produces
+import java.util.concurrent.ConcurrentHashMap
+import javax.inject.Singleton
+import javax.ws.rs.*
+import javax.ws.rs.core.Response
 import javax.ws.rs.core.MediaType
 
 import com.hhandoko.luwak.api.order.OrderData
@@ -31,17 +31,35 @@ import com.hhandoko.luwak.api.order.OrdersResponse
 /**
  * Coffee orders endpoint.
  */
+@Singleton
 @Path("/orders")
 @Produces(MediaType.APPLICATION_JSON)
 class OrderResource {
+
+    /**
+     * Order data in-memory store.
+     */
+    private val orderRepo = ConcurrentHashMap<String, OrderData>()
+
+    init {
+        // Populate the orderRepo with some data
+        listOf(
+                OrderData(UUID.randomUUID().toString(), "Coffee"),
+                OrderData(UUID.randomUUID().toString(), "Tea"),
+                OrderData(UUID.randomUUID().toString(), "Milkshake")
+        ).map {
+            Pair(it.ref, it)
+        }.forEach {
+            orderRepo.put(it.first, it.second)
+        }
+    }
 
     /**
      * Get all orders.
      */
     @GET
     fun get(): OrdersResponse {
-        val order = OrderData(UUID.randomUUID().toString(), "Coffee")
-        return OrdersResponse(listOf(order))
+        return OrdersResponse(orderRepo.values.toList())
     }
 
     /**
@@ -52,8 +70,9 @@ class OrderResource {
     @GET
     @Path("/{ref}")
     fun getOne(@PathParam("ref") ref: String): OrderResponse {
-        val order = OrderData(ref, "Coffee")
-        return OrderResponse(order)
+        return orderRepo[ref]?.run {
+            OrderResponse(this)
+        } ?: throw WebApplicationException(Response.Status.NOT_FOUND)
     }
 
 }
