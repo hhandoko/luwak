@@ -1,6 +1,6 @@
 # Kopi Luwak
 
-`luwak` is an experimentation with [Dropwizard], [Kotlin], and [Polymer].
+`luwak` is an experimentation with [Dropwizard], [Kotlin], and [React].
 
 ## Development Prerequisites
 
@@ -14,14 +14,13 @@ To compile, run, or package the project, you will need the following tools confi
   * Install Gradle and add the executable in the system path (`gradle`), or
   * Use the provided Gradle wrapper executable (`gradlew`) 
 * JavaScript build tools:
-  * [Bower] v1.8.x
   * [Node.js] v8.5.x
   * [npm] v5.4.x
 
 ## Usage
 
-* `npm i && bower i` to download and install front-end JavaScript dependencies
-* `npm run build` to compile front-end JavaScript assets
+* `npm i` to download and install front-end JavaScript dependencies
+* `npm run dist` to compile and minify front-end JavaScript assets
 * `gradle run` or `./gradlew run` to run the application from the command line
 * `gradle build` or `./gradlew build` to compile a jar (to run with `java -jar <build jar> server`)
 
@@ -72,4 +71,4 @@ Please read [CONTRIBUTING] for more details.
 [Oracle JDK]: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 [Node.js]: https://nodejs.org
 [npm]: https://www.npmjs.com
-[Polymer]: https://www.polymer-project.org
+[React]: https://facebook.github.io/react/
